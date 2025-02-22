@@ -1,1 +1,182 @@
-Hello world!
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frontend</title>
+    <style>
+      input {
+        border-radius: 12px;
+        color: white;
+        background-color: #04AA6D;
+        border: none;
+        padding: 8px;
+      }
+
+      button {
+          background-color: #04AA6D;
+          border: none;
+          padding: 8px;
+          border-radius: 12px;
+          color: white;
+          transition: background-color 0.6s, color 0.6s;
+      }
+      
+      button:hover {
+          background-color: white;
+          color: #06AA6D;
+      }
+    </style>
+</head>
+<body>
+    <h1>Degree conversion</h1>
+    <p><input id="C" onkeyup="convert('C')"> Degrees Celsius</p>
+    <p><input id="F" onkeyup="convert('F')"> Degrees Fahrenheit</p>
+
+    <br><br>
+    
+    <h1>Initial values</h1>
+    <p>ax <sup>2</sup> + bx + c = 0</p>
+    
+    
+
+    <h3>Discriminant method</h3>
+    <p>D = b <sup>2</sup> - 4 * a * c</p>
+    <p>x <sub>1, 2</sub> = -b +- D ** 0.5 / 2 * a</p>
+    <p>a = <input id="a"></p>
+    <p>b = <input id="b"></p>
+    <p>c = <input id="c"></p>
+    <button type="submit" onclick="discriminant()">Submit</button>
+    <p id="output"></p>
+
+    <br><br>
+
+    <h3>Vieta method</h3>
+    <p>x1 + x2 = -b</p>
+    <p>x1 * x2 = c </p>
+    <p id=""></p>
+    <p id=""></p>
+    <button type="submit" onclick="todayDay()">Click on me to find out what day it is today</button>
+    <p id="day"></p>
+
+    <br><br>
+
+    <h1>Initial values</h1>
+    <p>log<sub>a</sub>b = c</p>
+    <p>b = <input id="b1"></p>
+    <p>a = <input id="a1"></p>
+    <p>c = <input id="c1"></p>
+    <button type="submit" onclick="logarithm()">Click on me, to solve math problem</button>
+    <p id="output1"></p>
+    <script>
+      function convert(degree) {
+    var x;
+    if (degree == "C") {
+      x = document.getElementById("C").value * 9 / 5 + 32;
+      document.getElementById("F").value = Math.round(x);
+    } else {
+      x = (document.getElementById("F").value -32) * 5 / 9;
+      document.getElementById("C").value = Math.round(x);
+    }
+}
+
+
+function discriminant() {
+    
+    const a = parseFloat(document.getElementById("a").value);
+    const b = parseFloat(document.getElementById("b").value);
+    const c = parseFloat(document.getElementById("c").value);
+    const output = document.getElementById("output");
+    
+    if (isNaN(a) ||  isNaN(b) || isNaN(c)) {
+      output.innerHTML = "Пожалуйста, введите корректные значения!";
+      return;
+    }
+
+    if (a === 0) {
+      output.innerHTML = "Это не квадратное уравнение (a = 0)";
+      return;
+    }
+
+    const D = b * b - 4 * a * c;
+
+    if (D > 0) {
+      const x1 = (-b + Math.sqrt(D)) / (a * 2);
+      const x2 = (-b - Math.sqrt(D)) / (a * 2);
+      output.innerHTML = `D = ${D} ${"<br>"} В этом уравнении два корня ${"<br>"} x1 = ${x1} ${"<br>"} x2 = ${x2}`;
+    } else if (D === 0) {
+      const x = -b / (a * 2);
+      output.innerHTML = `D = ${D} ${"<br>"} В этом уравнении один корень ${"<br>"} x = ${x}`;
+    } else {
+      output.innerHTML = `D = ${D} ${"<br>"} Нет решения (D < 0)`;
+    }
+}
+
+
+function vieta(means) {
+    const x1 = parseFloat(document.getElementById("x1").value);
+    const x2 = parseFloat(document.getElementById("x1").value);
+    const output = document.getElementById("output");
+}
+
+
+let day;
+switch (new Date().getDay()) {
+    case 0:
+      day = "Sunday";
+      break;
+    case 1:
+      day = "Monday";
+      break;
+    case 2:
+      day = "Tuesday";
+      break;
+    case 3:
+      day = "Wednesday";
+      break;
+    case 4:
+      day = "Thursday";
+      break;
+    case 5:
+      day = "Friday";
+      break;
+    case 6:
+      day = "Saturday";
+      break;
+}
+
+function todayDay() {
+  document.getElementById("day").innerHTML = day;
+}
+
+function logarithm() {
+  const a1 = parseFloat(document.getElementById("a1").value);
+  const b1 = parseFloat(document.getElementById("b1").value);
+  const c1 = parseFloat(document.getElementById("c1").value);
+  const output1 = document.getElementById("output1");
+
+  if ((!isNaN(a1) && !isNaN(b1) && !isNaN(c1)) || 
+      (!isNaN(a1) && !isNaN(b1)) || 
+      (!isNaN(b1) && !isNaN(c1)) || 
+      (!isNaN(c1) && !isNaN(a1))) {
+
+      if (isNaN(a1)) {  // Calculate a = b^(1/c)
+          const resultA = Math.pow(b1, 1/c1);
+          output1.innerHTML = `log<sub>${b1}</sub> ${resultA} = ${c1}`;
+      } 
+      else if (isNaN(b1)) {  // Calculate b = a^c
+          const resultB = Math.pow(a1, c1);
+          output1.innerHTML = `log<sub>${resultB}</sub> ${a1} = ${c1}`;
+      } 
+      else if (isNaN(c1)) {  // Calculate c = log_b(a)
+          const resultC = Math.log(a1) / Math.log(b1);
+          output1.innerHTML = `log<sub>${b1}</sub> ${a1} = ${resultC.toFixed(3)}`;
+      }
+      
+  } else {
+      output1.innerHTML = "Please enter two known values.";
+  }
+}
+    </script>
+</body>
+</html>
