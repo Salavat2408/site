@@ -56,98 +56,154 @@
     <p>x1 * x2 = c </p>
     <p id=""></p>
     <p id=""></p>
+    
     <button type="submit" onclick="todayDay()">Click on me to find out what day it is today</button>
     <p id="day"></p>
 
     <br><br>
 
-    <h1>Initial values</h1>
+    <h1>Logarithm method</h1>
     <p>log<sub>a</sub>b = c</p>
     <p>b = <input id="b1"></p>
     <p>a = <input id="a1"></p>
     <p>c = <input id="c1"></p>
     <button type="submit" onclick="logarithm()">Click on me, to solve math problem</button>
     <p id="output1"></p>
+
+    <br><br>
+
+    <h1>Calculate percent</h1>
+    <h2>Initial values</h2>
+    <p>S - полученная сумма вместе с %</p>
+    <p>P<sub>o</sub> - депозит/кредит</p>
+    <p>i - % ставка</p>
+    <p>n - срок депозита/кредита</p>
+
+    <br>
+
+    <h3>Simple percent</h3>
+
+    <p>S = P<sub>o</sub> * (1 + i * n)</p>
+    <p>P<sub>o</sub> = <input id="Po1"></p>
+    <p>i = <input id="i1"></p>
+    <p>n = <input id="n1"></p>
+    <button type="submit" onclick="simplePercent()">Click on me, to solve math problem</button>
+    <p id="output2"></p>
+
+    <br>
+
+    <h3>Compound percent</h3>
+
+    <p>S = P<sub>o</sub> * (1 + i)<sup>n</sup></p>
+    <p>P<sub>o</sub> = <input id="Po2"></p>
+    <p>i = <input id="i2"></p>
+    <p>n = <input id="n2"></p>
+    <button type="submit" onclick="compoundPercent()">Click on me, to solve math problem</button>
+    <p id="output3"></p>
+
+    <br>
+
+    <h3>Monthly payments</h3>
+
+    <p>S = P<sub>o</sub> * i * n/t</p>
+    <p>n/t - количество периодов (1/12)</p>
+    <p>P<sub>o</sub> = <input id="Po3"></p>
+    <p>i = <input id="i3"></p>
+    <p>n = <input id="n3"></p>
+    <button type="submit" onclick="monthlyPayments()">Click on me, to solve math problem</button>
+    <p id="output4"></p>
+
+    <br>
+
+    <h3>Quarterly payments</h3>
+
+    <p>S = P<sub>o</sub> * i * n/t</p>
+    <p>n/t - количество периодов (1/4)</p>
+    <p>P<sub>o</sub> = <input id="Po4"></p>
+    <p>i = <input id="i4"></p>
+    <p>n = <input id="n4"></p>
+    <button type="submit" onclick="quarterlyPayments()">Click on me, to solve math problem</button>
+    <p id="output5"></p>
     <script>
-      function convert(degree) {
-    var x;
-    if (degree == "C") {
-      x = document.getElementById("C").value * 9 / 5 + 32;
-      document.getElementById("F").value = Math.round(x);
-    } else {
-      x = (document.getElementById("F").value -32) * 5 / 9;
-      document.getElementById("C").value = Math.round(x);
-    }
+function convert(degree) {
+  var x;
+  if (degree == "C") {
+    x = document.getElementById("C").value * 9 / 5 + 32;
+    document.getElementById("F").value = Math.round(x);
+  } else {
+    x = (document.getElementById("F").value -32) * 5 / 9;
+    document.getElementById("C").value = Math.round(x);
+  }
 }
 
 
 function discriminant() {
+  const a = parseFloat(document.getElementById("a").value);
+  const b = parseFloat(document.getElementById("b").value);
+  const c = parseFloat(document.getElementById("c").value);
+  const output = document.getElementById("output");
     
-    const a = parseFloat(document.getElementById("a").value);
-    const b = parseFloat(document.getElementById("b").value);
-    const c = parseFloat(document.getElementById("c").value);
-    const output = document.getElementById("output");
-    
-    if (isNaN(a) ||  isNaN(b) || isNaN(c)) {
-      output.innerHTML = "Пожалуйста, введите корректные значения!";
-      return;
-    }
+  if (isNaN(a) ||  isNaN(b) || isNaN(c)) {
+    output.innerHTML = "Пожалуйста, введите корректные значения!";
+    return;
+  }
 
-    if (a === 0) {
-      output.innerHTML = "Это не квадратное уравнение (a = 0)";
-      return;
-    }
+  if (a === 0) {
+    output.innerHTML = "Это не квадратное уравнение (a = 0)";
+    return;
+  }
 
-    const D = b * b - 4 * a * c;
+  const D = b * b - 4 * a * c;
 
-    if (D > 0) {
-      const x1 = (-b + Math.sqrt(D)) / (a * 2);
-      const x2 = (-b - Math.sqrt(D)) / (a * 2);
-      output.innerHTML = `D = ${D} ${"<br>"} В этом уравнении два корня ${"<br>"} x1 = ${x1} ${"<br>"} x2 = ${x2}`;
-    } else if (D === 0) {
-      const x = -b / (a * 2);
-      output.innerHTML = `D = ${D} ${"<br>"} В этом уравнении один корень ${"<br>"} x = ${x}`;
-    } else {
-      output.innerHTML = `D = ${D} ${"<br>"} Нет решения (D < 0)`;
-    }
+  if (D > 0) {
+    const x1 = (-b + Math.sqrt(D)) / (a * 2);
+    const x2 = (-b - Math.sqrt(D)) / (a * 2);
+    output.innerHTML = `D = ${D} ${"<br>"} В этом уравнении два корня ${"<br>"} x1 = ${x1} ${"<br>"} x2 = ${x2}`;
+  } else if (D === 0) {
+    const x = -b / (a * 2);
+    output.innerHTML = `D = ${D} ${"<br>"} В этом уравнении один корень ${"<br>"} x = ${x}`;
+  } else {
+    output.innerHTML = `D = ${D} ${"<br>"} Нет решения (D < 0)`;
+  }
 }
 
 
 function vieta(means) {
-    const x1 = parseFloat(document.getElementById("x1").value);
-    const x2 = parseFloat(document.getElementById("x1").value);
-    const output = document.getElementById("output");
+  const x1 = parseFloat(document.getElementById("x1").value);
+  const x2 = parseFloat(document.getElementById("x1").value);
+  const output = document.getElementById("output");
 }
 
 
 let day;
 switch (new Date().getDay()) {
-    case 0:
-      day = "Sunday";
-      break;
-    case 1:
-      day = "Monday";
-      break;
-    case 2:
-      day = "Tuesday";
-      break;
-    case 3:
-      day = "Wednesday";
-      break;
-    case 4:
-      day = "Thursday";
-      break;
-    case 5:
-      day = "Friday";
-      break;
-    case 6:
-      day = "Saturday";
-      break;
+  case 0:
+    day = "Sunday";
+    break;
+  case 1:
+    day = "Monday";
+    break;
+  case 2:
+    day = "Tuesday";
+    break;
+  case 3:
+    day = "Wednesday";
+    break;
+  case 4:
+    day = "Thursday";
+    break;
+  case 5:
+    day = "Friday";
+    break;
+  case 6:
+    day = "Saturday";
+    break;
 }
 
 function todayDay() {
   document.getElementById("day").innerHTML = day;
 }
+
 
 function logarithm() {
   const a1 = parseFloat(document.getElementById("a1").value);
@@ -176,6 +232,70 @@ function logarithm() {
   } else {
       output1.innerHTML = "Please enter two known values.";
   }
+}
+
+
+function simplePercent() {
+  const Po1 = parseFloat(document.getElementById("Po1").value);
+  const i1 = parseFloat(document.getElementById("i1").value);
+  const n1 = parseFloat(document.getElementById("n1").value);
+  const output2 = document.getElementById("output2");
+
+  if (isNaN(Po1) || isNaN(i1) || isNaN(n1)) {
+    output2.innerHTML = "Please, enter correct values";
+    return;
+  }
+
+  const S1 = Po1 * (1 + (i1 / 100) * n1);
+  output2.innerHTML = `S = ${S1}`;
+}
+
+
+function compoundPercent() {
+  const Po2 = parseFloat(document.getElementById("Po2").value);
+  const i2 = parseFloat(document.getElementById("i2").value);
+  const n2 = parseFloat(document.getElementById("n2").value);
+  const output3 = document.getElementById("output3");
+
+  if (isNaN(Po2) || isNaN(i2) || isNaN(n2)) {
+    output3.innerHTML = "Please, enter correct values";
+    return;
+  }
+
+  const S2 = Po2 * Math.pow((1 + (i2 / 100)), n2);
+  output3.innerHTML = `S = ${S2}`
+}
+
+
+function monthlyPayments() {
+  const Po3 = parseFloat(document.getElementById("Po3").value);
+  const i3 = parseFloat(document.getElementById("i3").value);
+  const n3 = parseFloat(document.getElementById("n3").value);
+  const output4 = document.getElementById("output4");
+
+  if (isNaN(Po3) || isNaN(i3) || isNaN(n3)) {
+    output4.innerHTML = "Please, enter correct values";
+    return;
+  }
+
+  const S3 = Po3 * (i3 / 100) * (1/(n3 * 12));
+  output4.innerHTML = `S = ${S3}`;
+}
+
+
+function quarterlyPayments() {
+  const Po4 = parseFloat(document.getElementById("Po4").value);
+  const i4 = parseFloat(document.getElementById("i4").value);
+  const n4 = parseFloat(document.getElementById("n4").value);
+  const output5= document.getElementById("output5");
+
+  if (isNaN(Po4) || isNaN(i4) || isNaN(n4)) {
+    output5.innerHTML = "Please, enter correct values";
+    return;
+  }
+
+  const S4 = Po4 * (i4 / 100) * (1/(n4 * 4));
+  output5.innerHTML = `S = ${S4}`;
 }
     </script>
 </body>
