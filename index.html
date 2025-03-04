@@ -14,17 +14,49 @@
       }
 
       button {
-          background-color: #04AA6D;
-          border: none;
-          padding: 8px;
-          border-radius: 12px;
-          color: white;
-          transition: background-color 0.6s, color 0.6s;
+        background-color: #04AA6D;
+        border: none;
+        padding: 8px;
+        border-radius: 12px;
+        color: white;
+        transition: background-color 0.6s, color 0.6s;
       }
       
       button:hover {
           background-color: white;
           color: #06AA6D;
+      }
+
+      .heart {
+        border: 1px solid black;
+        border-radius: 100px 100px 0px 0px;
+        width: 50px;
+        height: 75px;
+        position: relative;
+        transform: rotate(45deg);
+        margin-left: 50px;
+        background-color: IndianRed;
+      }
+
+      .heart1 {
+        border: 1px solid black;
+        border-radius: 100px 100px 0px 0px;
+        width: 50px;
+        transform: rotate(315deg);
+        height: 75px;
+        margin-left: 32px;
+        margin-top: -77px;
+        position: absolute;
+        background-color: IndianRed;
+      }
+
+      .button1 {
+        border-radius: 20px;
+        color: IndianRed;
+        padding: 7px;
+        background-color: Indianred;
+        margin-top: 20px;
+        margin-left: 25px;
       }
     </style>
 </head>
@@ -124,6 +156,13 @@
     <p>n = <input id="n4"></p>
     <button type="submit" onclick="quarterlyPayments()">Click on me, to solve math problem</button>
     <p id="output5"></p>
+
+    <div class="total">
+        <div class="heart"></div>
+        <div class="heart1"></div>
+    </div>
+    <button class="button1" type="button"></button>
+    
     <script>
 function convert(degree) {
   var x;
